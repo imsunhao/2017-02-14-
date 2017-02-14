@@ -10,18 +10,18 @@
 <script>
     //阶乘函数
     function factorial(num) {
-        if(num <= 1) {
+        if (num <= 1) {
             return 1;
         } else {
             return num * arguments.callee(num - 1);
         }
     }
     //数组去重
-    Array.prototype.unique3 = function(){
+    Array.prototype.unique3 = function () {
         var res = [];
         var json = {};
-        for(var i = 0; i < this.length; i++){
-            if(!json[this[i]]){
+        for (var i = 0; i < this.length; i++) {
+            if (!json[this[i]]) {
                 res.push(this[i]);
                 json[this[i]] = 1;
             }
@@ -29,68 +29,65 @@
         return res;
     }
 
-    var a='ABC';
-    var char=[];
-    var sult=[];
-    for(var i=0;i<a.length;i++){
+    var a = 'ABC';
+    var char = [];
+    var sult = [];
+    for (var i = 0; i < a.length; i++) {
         char.push(a[i]);
     }
-    console.log(a+"\t一共有："+factorial(a.length)+"种结果.");
+    console.log(a + "\t一共有：" + factorial(a.length) + "种结果.");
 
-    var string=[];
-    var step='';
+    var string = [];
+    console.log("----------------------");
     console.log("计算过程：第一步");
-    step=a[0];
-
-    string[0]=step;
-    console.log(string[0]+"\n----------------------");
-    console.log("计算过程：第二步");
-    step=a[1];
-    string=(function (step,string) {
-        string[1]=string[0];
-        string[0]=string[0];
-
-        string[0]+=step;
+    string =(function (step) {
+        string[0] = step;
         console.log(string[0]);
-        string[1]=step+string[1];
+        return string;
+    })(a[0],string);
+    console.log("----------------------");
+    console.log(string);
+    console.log("计算过程：第二步");
+    string = (function (step, string) {
+        string[1] = string[0];
+        string[0] = string[0];
+
+        string[0] += step;
+        console.log(string[0]);
+        string[1] = step + string[1];
         console.log(string[1]);
         return string;
-    })(step,string)
+    })(a[1], string)
     console.log("----------------------");
+    console.log(string);
     console.log("计算过程：第三步");
-    step=a[2];
-    string=(function (step,string) {
-        console.log(" 第一小步");
-        string[0]=(function (step,str) {
-            var string=[]
-            string[0]=str;
-            string[1]=string[0];
-            string[2]=string[0];
-            string[0]+=step;
+    string = (function (step, string) {
+        function setp3(step, str) {
+            var string = []
+            string[0] = str;
+            string[1] = string[0];
+            string[2] = string[0];
+            string[0] += step;
             console.log(string[0]);
-            string[1]=string[1][0]+step+string[1][1];
+            string[1] = string[1][0] + step + string[1][1];
             console.log(string[1]);
-            string[2]=step+string[2];
+            string[2] = step + string[2];
             console.log(string[2]);
-        })(step,string[0])
+            return string;
+        }
+
+        console.log(" 第一小步");
+        string[0] = setp3(step, string[0])
         console.log("-----------");
         console.log(" 第二小步");
-        string[1]=(function (step,str) {
-            var string=[]
-            string[0]=str;
-            string[1]=string[0];
-            string[2]=string[0];
-            string[0]+=step;
-            console.log(string[0]);
-            string[1]=string[1][0]+step+string[1][1];
-            console.log(string[1]);
-            string[2]=step+string[2];
-            console.log(string[2]);
-        })(step,string[1])
+        string[1] = setp3(step, string[1])
         console.log("-----------");
+
+
         return string;
-    })(step,string);
+    })(a[2], string);
     console.log("----------------------");
+    console.log(string);
 
 
 </script>
