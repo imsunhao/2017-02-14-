@@ -20,7 +20,30 @@ Array.prototype.unique3 = function () {
     return res;
 }
 
-let a = 'ABCE';
+//字符串操作
+Array.prototype.toString = function () {
+    let str="";
+    for(let i=0;i<this.length;i++){
+        str+=this[i];
+    }
+    return str;
+}
+Array.prototype.toString = function () {
+    let str="";
+    for(let i=0;i<this.length;i++){
+        str+=this[i];
+    }
+    return str;
+}
+String.prototype.toArray=function () {
+    let arr=[];
+    for(let i=0;i<this.length;i++){
+        arr.push(this[i]);
+    }
+    return arr;
+}
+
+const a = 'ABCE';
 let char = [];
 let sult = [];
 for (let i = 0; i < a.length; i++) {
@@ -69,7 +92,7 @@ string = (function (step, string) {
 
     for (let i = 0; i < string.length; i++) {
         console.log(" 第" + i + "小步");
-        string[i] = setp3(step, string[i])
+        string[i] = setp3(step, string[i]);
         console.log("-----------");
     }
     return string;
@@ -106,7 +129,7 @@ string = (function (step, string) {
 
         for (let i = 0; i < string.length; i++) {
             console.log("  第" + i + "小步");
-            string[i] = setp43(step, string[i])
+            string[i] = setp43(step, string[i]);
             console.log("-----");
         }
         return string;
@@ -114,7 +137,7 @@ string = (function (step, string) {
 
     for (let i = 0; i < string.length; i++) {
         console.log(" 第" + i + "小步");
-        string[i] = setp4(step, string[i])
+        string[i] = setp4(step, string[i]);
         console.log("-----------");
     }
 
