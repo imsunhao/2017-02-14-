@@ -104,43 +104,16 @@
     })(a[3], string);
     console.log("----------------------");
     console.log("计算过程：第五步");
-    //    string = (function (step, string) {
-    //        for (let i = 0; i < 2; i++) {
-    //            console.log(" 第" + i + "小步");
-    //            for (let j = 0; j < 3; j++) {
-    //                console.log("  第" + j + "小步");
-    //                    for(let k=0;k<4;k++){
-    //                        console.log("   第" + k + "小步");
-    //                        string[i][j][k] = setp(step, string[i][j][k],5);
-    //                        console.log("---");
-    //                    }
-    //                console.log("-----");
-    //            }
-    //            console.log("-----------");
-    //        }
-    //        return string;
-    //    })(a[4], string);
-    //    console.log("----------------------------------------------------------------");
-
-
-    var length = a.length;
     function test(string,number) {
-        for (let i = 0; i < number; i++) {
-            string[i] = setp(a[number], string[i], (number+1));
-        }
-    }
-    function test2(string,number) {
         for(let i=0;i<number;i++){
-            test(string[i],number+1);
+            if(number==4){
+                string[i] = setp(a[number], string[i], (number+1));
+            }else{
+                test(string[i],number+1);
+            }
         }
     }
-    function test3(string,number) {
-        for(let i=0;i<number;i++){
-            test2(string[i],number+1);
-        }
-    }
-    test3(string,2);
-
+    test(string,2);
 
 
     console.log(string);
