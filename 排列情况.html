@@ -7,5 +7,118 @@
 <body>
 
 </body>
-<script src="js.js"></script>
+<!--<script src="js.js"></script>-->
+<script>
+    "use strict";
+    //阶乘函数
+    function factorial(num) {
+        if (num <= 1) {
+            return 1;
+        } else {
+            return num * factorial(num - 1);
+        }
+    }
+    //数组去重
+    function unique3(arr) {
+        let res = [];
+        let json = {};
+        for (let i = 0; i < arr.length; i++) {
+            if (!json[arr[i]]) {
+                res.push(arr[i]);
+                json[arr[i]] = 1;
+            }
+        }
+        return res;
+    }
+
+    //数组->字符串  操作
+    function toString(arr) {
+        let str = "";
+        for (let i = 0; i < arr.length; i++) {
+            str += arr[i];
+        }
+        return str;
+    }
+    //字符串->数组  操作
+    function toArray(str) {
+        let arr = [];
+        for (let i = 0; i < str.length; i++) {
+            arr.push(str[i]);
+        }
+        return arr;
+    }
+
+    const a = 'ABCE';
+
+
+    let sult = [];
+    console.log(a + "\t一共有：" + factorial(a.length) + "种结果.");
+
+    let string = [];
+    console.log("----------------------");
+    console.log("计算过程：第一步");
+    string = (function (step) {
+        string[0] = step;
+        console.log(string[0]);
+        return string;
+    })(a[0], string);
+    console.log("----------------------");
+    console.log("计算过程：第二步");
+    string = (function (step, string) {
+        string[1] = string[0];
+        string[0] = string[0];
+
+        string[0] = toArray(string[0]).concat(step);
+        string[1] = toArray(string[1]);
+        string[1].splice(0, 0, step);
+        console.log(toString(string[0]));
+        console.log(toString(string[1]));
+        return string;
+    })(a[1], string);
+    console.log("----------------------");
+    console.log("计算过程：第三步");
+    string = (function (step, string) {
+        function setp(step, str, number) {
+            let string = []
+            for (let i = 0; i < number; i++) {
+                string[i] = str.concat();
+                string[i].splice(i, 0, step);
+                console.log(toString(string[i]));
+            }
+            return string;
+        }
+
+        for (let i = 0; i < string.length; i++) {
+            console.log(" 第" + i + "小步");
+            string[i] = setp(step, string[i], 3);
+            console.log("-----------");
+        }
+        return string;
+    })(a[2], string);
+     console.log("----------------------");
+     console.log("计算过程：第四步");
+     string = (function (step, string) {
+         function setp(step, str, number) {
+             let string = []
+             for (let i = 0; i < number; i++) {
+                 string[i] = str.concat();
+                 string[i].splice(i, 0, step);
+                 console.log(toString(string[i]));
+             }
+             return string;
+         }
+         for (let i = 0; i < 2; i++) {
+             console.log(" 第" + i + "小步");
+             for (let j = 0; j < 3; j++) {
+                 console.log("  第" + j + "小步");
+                 string[i][j] = setp(step, string[i][j],4);
+                 console.log("-----");
+             }
+             console.log("-----------");
+         }
+         return string;
+     })(a[3], string);
+     console.log(string);
+     console.log("----------------------");
+</script>
 </html>
