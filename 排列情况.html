@@ -48,7 +48,7 @@
         return arr;
     }
 
-    const a = 'ABCE';
+    const a = 'ABCE颢';
 
 
     let sult = [];
@@ -96,29 +96,55 @@
         return string;
     })(a[2], string);
      console.log("----------------------");
-     console.log("计算过程：第四步");
-     string = (function (step, string) {
-         function setp(step, str, number) {
-             let string = []
-             for (let i = 0; i < number; i++) {
-                 string[i] = str.concat();
-                 string[i].splice(i, 0, step);
-                 console.log(toString(string[i]));
-             }
-             return string;
-         }
-         for (let i = 0; i < 2; i++) {
-             console.log(" 第" + i + "小步");
-             for (let j = 0; j < 3; j++) {
-                 console.log("  第" + j + "小步");
-                 string[i][j] = setp(step, string[i][j],4);
-                 console.log("-----");
-             }
-             console.log("-----------");
-         }
-         return string;
-     })(a[3], string);
-     console.log(string);
-     console.log("----------------------");
+    console.log("计算过程：第四步");
+    string = (function (step, string) {
+        function setp(step, str, number) {
+            let string = []
+            for (let i = 0; i < number; i++) {
+                string[i] = str.concat();
+                string[i].splice(i, 0, step);
+                console.log(toString(string[i]));
+            }
+            return string;
+        }
+        for (let i = 0; i < 2; i++) {
+            console.log(" 第" + i + "小步");
+            for (let j = 0; j < 3; j++) {
+                console.log("  第" + j + "小步");
+                string[i][j] = setp(step, string[i][j],4);
+                console.log("-----");
+            }
+            console.log("-----------");
+        }
+        return string;
+    })(a[3], string);
+    console.log("----------------------");
+    console.log("计算过程：第五步");
+    string = (function (step, string) {
+        function setp(step, str, number) {
+            let string = []
+            for (let i = 0; i < number; i++) {
+                string[i] = str.concat();
+                string[i].splice(i, 0, step);
+                console.log(toString(string[i]));
+            }
+            return string;
+        }
+        for (let i = 0; i < 2; i++) {
+            console.log(" 第" + i + "小步");
+            for (let j = 0; j < 3; j++) {
+                console.log("  第" + j + "小步");
+                    for(let k=0;k<4;k++){
+                        console.log("   第" + k + "小步");
+                        string[i][j][k] = setp(step, string[i][j][k],5);
+                        console.log("---");
+                    }
+                console.log("-----");
+            }
+            console.log("-----------");
+        }
+        return string;
+    })(a[4], string);
+    console.log("----------------------");
 </script>
 </html>
