@@ -65,14 +65,16 @@
     console.log("----------------------");
     console.log("计算过程：第二步");
     string = (function (step, string) {
-        string[1] = string[0];
-        string[0] = string[0];
-
-        string[0] = toArray(string[0]).concat(step);
-        string[1] = toArray(string[1]);
-        string[1].splice(0, 0, step);
-        console.log(toString(string[0]));
-        console.log(toString(string[1]));
+        function setp(step, str, number) {
+            let string = []
+            for (let i = 0; i < number; i++) {
+                string[i] = str.concat();
+                string[i].splice(i, 0, step);
+                console.log(toString(string[i]));
+            }
+            return string;
+        }
+        string = setp(step, string, 2);
         return string;
     })(a[1], string);
     console.log("----------------------");
@@ -87,7 +89,6 @@
             }
             return string;
         }
-
         for (let i = 0; i < string.length; i++) {
             console.log(" 第" + i + "小步");
             string[i] = setp(step, string[i], 3);
