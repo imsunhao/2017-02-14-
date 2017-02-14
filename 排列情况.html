@@ -29,7 +29,7 @@
         return res;
     }
 
-    var a='abc';
+    var a='ABC';
     var char=[];
     var sult=[];
     for(var i=0;i<a.length;i++){
@@ -37,60 +37,60 @@
     }
     console.log(a+"\t一共有："+factorial(a.length)+"种结果.");
 
-
-
-
     var string=[];
-    var step=a[0];
+    var step='';
     console.log("计算过程：第一步");
-    string=[];
     step=a[0];
 
     string[0]=step;
     console.log(string[0]+"\n----------------------");
     console.log("计算过程：第二步");
     step=a[1];
+    string=(function (step,string) {
+        string[1]=string[0];
+        string[0]=string[0];
 
-
-
-    (function (step) {
-        string[21]=string[0];
-        string[20]=string[0];
-
-        string[20]+=step;
-        console.log(string[20]);
-        string[21]=step+string[21];
-        console.log(string[21]);
-    })(step)
+        string[0]+=step;
+        console.log(string[0]);
+        string[1]=step+string[1];
+        console.log(string[1]);
+        return string;
+    })(step,string)
     console.log("----------------------");
-    console.log("计算过程：第三步\n 第一小步");
+    console.log("计算过程：第三步");
     step=a[2];
-    string[31]=string[20];
-    string[32]=string[20];
-    string[33]=string[21];
-    string[34]=string[21];
-
-
-
-    (function () {
-        string[20]+=a[2];
-        console.log(string[20]);
-        string[31]=string[31][0]+a[2]+string[31][1];
-        console.log(string[31]);
-        string[32]=a[2]+string[32];
-        console.log(string[32]);
-    })(step)
-    console.log("-----------");
-    console.log(" 第二小步");
-    (function (step) {
-        string[21]+=a[2];
-        console.log(string[21]);
-        string[33]=string[33][0]+a[2]+string[33][1];
-        console.log(string[33]);
-        string[34]=a[2]+string[34];
-        console.log(string[34]);
-    })(step)
-    console.log("-----------");
+    string=(function (step,string) {
+        console.log(" 第一小步");
+        string[0]=(function (step,str) {
+            var string=[]
+            string[0]=str;
+            string[1]=string[0];
+            string[2]=string[0];
+            string[0]+=step;
+            console.log(string[0]);
+            string[1]=string[1][0]+step+string[1][1];
+            console.log(string[1]);
+            string[2]=step+string[2];
+            console.log(string[2]);
+        })(step,string[0])
+        console.log("-----------");
+        console.log(" 第二小步");
+        string[1]=(function (step,str) {
+            var string=[]
+            string[0]=str;
+            string[1]=string[0];
+            string[2]=string[0];
+            string[0]+=step;
+            console.log(string[0]);
+            string[1]=string[1][0]+step+string[1][1];
+            console.log(string[1]);
+            string[2]=step+string[2];
+            console.log(string[2]);
+        })(step,string[1])
+        console.log("-----------");
+        return string;
+    })(step,string);
+    console.log("----------------------");
 
 
 </script>
