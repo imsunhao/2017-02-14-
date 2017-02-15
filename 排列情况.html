@@ -57,6 +57,16 @@
         }
         return string;
     }
+    function test(string,number) {
+        for(let i=0;i<number;i++){
+//            if(number==4){ //5
+            if(number==2){ //4
+                string[i] = setp(a[number+1], string[i], (number+2));
+            }else{
+                test(string[i],number+1);
+            }
+        }
+    }
 
     const a = 'ABCE颢';
 
@@ -90,30 +100,10 @@
     })(a[2], string);
     console.log("----------------------");
     console.log("计算过程：第四步");
-    string = (function (step, string) {
-        for (let i = 0; i < 2; i++) {
-            console.log(" 第" + i + "小步");
-            for (let j = 0; j < 3; j++) {
-                console.log("  第" + j + "小步");
-                string[i][j] = setp(step, string[i][j], 4);
-                console.log("-----");
-            }
-            console.log("-----------");
-        }
-        return string;
-    })(a[3], string);
+    test(string,1)
     console.log("----------------------");
     console.log("计算过程：第五步");
-    function test(string,number) {
-        for(let i=0;i<number;i++){
-            if(number==4){
-                string[i] = setp(a[number], string[i], (number+1));
-            }else{
-                test(string[i],number+1);
-            }
-        }
-    }
-    test(string,2);
+//    test(string,2);
 
 
     console.log(string);
