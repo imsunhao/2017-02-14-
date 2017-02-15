@@ -49,6 +49,7 @@
     }
     //核心函数
     function setp(step, str, number) {
+        if(typeof(str)=='undefined') return;
         let string = []
         for (let i = 0; i < number; i++) {
             string[i] = str.concat();
@@ -57,22 +58,18 @@
         }
         return string;
     }
-    function test(string,number) {
-//        for(let i=0;i<number;i++){ //4 5
-        for(let i=0;i<number+2;i++){ //3
-//            if(number==4){ //5
-//            if(number==2){ //4
-            if(number==0){ //3
-                string[i] = setp(a[number+2], string[i], (number+3));  //3
-//                string[i] = setp(a[number+1], string[i], (number+2)); //4
-//                string[i] = setp(a[number], string[i], (number)); //5
+    function test(string,number,end) {   //  number:0 1 2     end:0 1 2
+        if(typeof(string)=='undefined') return;
+        for(let i=0;i<end+2;i++){ // 2 3 4
+            if(number==end*2){ //3   end=0 1 2
+                string[i] = setp(a[end+2], string[i], (end+3));  //3  a[end+3]:2C 3E 4颢   end+3:3 4 5
             }else{
-                test(string[i],number+1);
+                test(string[i],number+1,end);
             }
         }
     }
 
-    const a = 'ABCE颢';
+    const a = 'ABCE颢孙';
 
 
     let sult = [];
@@ -93,15 +90,12 @@
         return string;
     })(a[1], string);
     console.log("----------------------");
-    console.log("计算过程：第三步");
-    test(string,0);
-//    console.log("----------------------");
-//    console.log("计算过程：第四步");
-//    test(string,1);
-//    console.log("----------------------");
-//    console.log("计算过程：第五步");
-//    test(string,2);
 
+    for(let i=0;i<(a.length-2);i++){  //一共5步，已经完成2步，这个循环完成后面3步
+        console.log("计算过程：第"+(i+3)+"步");
+        test(string,i,i);
+        console.log("----------------------");
+    }
 
     console.log(string);
 
