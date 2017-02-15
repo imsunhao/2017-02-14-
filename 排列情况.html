@@ -60,7 +60,8 @@
     function test(string,number) {
         for(let i=0;i<number;i++){
 //            if(number==4){ //5
-            if(number==2){ //4
+//            if(number==2){ //4
+            if(number==0){ //3
                 string[i] = setp(a[number+1], string[i], (number+2));
             }else{
                 test(string[i],number+1);
@@ -90,17 +91,10 @@
     })(a[1], string);
     console.log("----------------------");
     console.log("计算过程：第三步");
-    string = (function (step, string) {
-        for (let i = 0; i < string.length; i++) {
-            console.log(" 第" + i + "小步");
-            string[i] = setp(step, string[i], 3);
-            console.log("-----------");
-        }
-        return string;
-    })(a[2], string);
+    test(string,0);
     console.log("----------------------");
     console.log("计算过程：第四步");
-    test(string,1)
+//    test(string,1);
     console.log("----------------------");
     console.log("计算过程：第五步");
 //    test(string,2);
