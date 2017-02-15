@@ -5,99 +5,125 @@
     <title>Title</title>
 </head>
 <body>
-
+<div id="app">
+    <input type="text" v-model="input" @change="solveInput">
+    <ul>
+        <li v-for="(item,index) in sult">
+            id:  {{index}}    {{ item }}
+        </li>
+    </ul>
+    <p>结果一共有：{{factorial(input.length)}}</p>
+    <p>不重复的一共有：{{sult.length}}</p>
+</div>
 </body>
-<!--<script src="js.js"></script>-->
+<!--<script src="lib/vue.js"></script>-->
+<script src="lib/vue.min.js"></script>
 <script>
     "use strict";
-    //阶乘函数
-    function factorial(num) {
-        if (num <= 1) {
-            return 1;
-        } else {
-            return num * factorial(num - 1);
-        }
-    }
-    //数组去重
-    function unique3(arr) {
-        let res = [];
-        let json = {};
-        for (let i = 0; i < arr.length; i++) {
-            if (!json[arr[i]]) {
-                res.push(arr[i]);
-                json[arr[i]] = 1;
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            input: '',
+            sult: []
+        },
+        methods: {
+            factorial: function (num) {
+                function fa(num) {
+                    if (num <= 1) {
+                        return 1;
+                    } else {
+                        return num * fa(num - 1);
+                    }
+                }
+                if (num <= 0)return 0;
+                else return fa(num);
+            },
+            solveInput: function () {
+                let a = this.input;
+                let sult = [];
+                let string = [];
+                console.clear();
+                //数组去重
+                function unique3(arr) {
+                    let res = [];
+                    let json = {};
+                    for (let i = 0; i < arr.length; i++) {
+                        if (!json[arr[i]]) {
+                            res.push(arr[i]);
+                            json[arr[i]] = 1;
+                        }
+                    }
+                    return res;
+                }
+
+                //数组->字符串  操作
+                function toString(arr) {
+                    let str = "";
+                    for (let i = 0; i < arr.length; i++) {
+                        str += arr[i];
+                    }
+                    return str;
+                }
+
+                //字符串->数组  操作
+                function toArray(str) {
+                    let arr = [];
+                    for (let i = 0; i < str.length; i++) {
+                        arr.push(str[i]);
+                    }
+                    return arr;
+                }
+
+                //核心函数
+                function setp(step, str, number) {
+                    if (typeof(str) == 'undefined') return;
+                    let string = [];
+                    for (let i = 0; i < number; i++) {
+                        string[i] = str.concat();
+                        string[i].splice(i, 0, step);
+                        let s = toString(string[i]);
+                        console.log(s);
+                        if(s.length==a.length) sult.push(s);
+                    }
+                    return string;
+                }
+                function start(string, number, end) {   //  number:0 1 2     end:0 1 2
+                    if (typeof(string) == 'undefined') return;
+                    for (let i = 0; i < end + 2; i++) { // 2 3 4
+                        if (number == end * 2) { //3   end=0 1 2
+                            string[i] = setp(a[end + 2], string[i], (end + 3));  //3  a[end+3]:2C 3E 4颢   end+3:3 4 5
+                        } else {
+                            start(string[i], number + 1, end);
+                        }
+                    }
+                }
+
+                console.log("----------------------");
+                console.log("计算过程：第一步");
+                string = (function (step) {
+                    string[0] = step;
+                    console.log(string[0]);
+                    return string;
+                })(a[0], string);
+                console.log("----------------------");
+                console.log("计算过程：第二步");
+                string = (function (step, string) {
+                    string = setp(step, string, 2);
+                    return string;
+                })(a[1], string);
+                console.log("----------------------");
+                for (let i = 0; i < (a.length - 2); i++) {  //一共5步，已经完成2步，这个循环完成后面3步
+                    console.log("计算过程：第" + (i + 3) + "步");
+                    start(string, i, i);
+                    console.log("----------------------");
+                }
+
+                this.sult = unique3(sult);
+                console.log(this.sult);
             }
         }
-        return res;
-    }
-
-    //数组->字符串  操作
-    function toString(arr) {
-        let str = "";
-        for (let i = 0; i < arr.length; i++) {
-            str += arr[i];
-        }
-        return str;
-    }
-    //字符串->数组  操作
-    function toArray(str) {
-        let arr = [];
-        for (let i = 0; i < str.length; i++) {
-            arr.push(str[i]);
-        }
-        return arr;
-    }
-    //核心函数
-    function setp(step, str, number) {
-        if(typeof(str)=='undefined') return;
-        let string = []
-        for (let i = 0; i < number; i++) {
-            string[i] = str.concat();
-            string[i].splice(i, 0, step);
-            console.log(toString(string[i]));
-        }
-        return string;
-    }
-    function test(string,number,end) {   //  number:0 1 2     end:0 1 2
-        if(typeof(string)=='undefined') return;
-        for(let i=0;i<end+2;i++){ // 2 3 4
-            if(number==end*2){ //3   end=0 1 2
-                string[i] = setp(a[end+2], string[i], (end+3));  //3  a[end+3]:2C 3E 4颢   end+3:3 4 5
-            }else{
-                test(string[i],number+1,end);
-            }
-        }
-    }
-
-    const a = 'ABCE颢孙';
-
-
-    let sult = [];
-    console.log(a + "\t一共有：" + factorial(a.length) + "种结果.");
-
-    let string = [];
-    console.log("----------------------");
-    console.log("计算过程：第一步");
-    string = (function (step) {
-        string[0] = step;
-        console.log(string[0]);
-        return string;
-    })(a[0], string);
-    console.log("----------------------");
-    console.log("计算过程：第二步");
-    string = (function (step, string) {
-        string = setp(step, string, 2);
-        return string;
-    })(a[1], string);
-    console.log("----------------------");
-
-    for(let i=0;i<(a.length-2);i++){  //一共5步，已经完成2步，这个循环完成后面3步
-        console.log("计算过程：第"+(i+3)+"步");
-        test(string,i,i);
-        console.log("----------------------");
-    }
-
-    console.log(string);
+    })
 
 
 </script>
